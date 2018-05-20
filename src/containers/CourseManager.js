@@ -13,11 +13,13 @@ class CourseManager extends Component {
                 {/*<LessonTabs/>*/}
                 {/*<ModuleList/>*/}
                 <div className="card-deck">
-                <CourseCard/>
                     <CourseCard/>
                     <CourseCard/>
                     <CourseCard/>
                     <CourseCard/>
+                    <CourseCard/>
+                    <CourseCard/>
+
                 </div>
             </div>
         )
