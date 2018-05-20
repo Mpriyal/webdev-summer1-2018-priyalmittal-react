@@ -1,14 +1,14 @@
 import React from 'react'
 
-class HelloWorld extends React.Component {
+class Hello extends React.Component {
     constructor(props) {
         super(props);
     }
     render() {
         return (
-            <h1>{this.props.message}</h1>
+            <h1>Hello World!!</h1>
         )
     }
 }
 
-export default HelloWorld;
+export default Hello;
