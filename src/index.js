@@ -23,8 +23,8 @@ import App from "./examples/App"
 
 ReactDOM.render(
     <div className="container-fluid">
-        <App/>
-        {/*<CourseManager/>*/}
+        {/*<App/>*/}
+        <CourseManager/>
     </div>,
     document.getElementById('root')
 );

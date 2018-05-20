@@ -32,12 +32,12 @@ class ModuleList2 extends React.Component {
 
     //event listener
     titleChanged(event) {
-        console.log(event.target.value);
-        this.setState({module:{title: event.target.value}});
+        console.log(event.target.value); //captures whatever has been typed in the input field
+        this.setState({module:{title: event.target.value}}); //title is set here
     }
 
     createModule(event) {
-        console.log(this.state.module);
+        console.log(this.state.module); //here we have the title as a json object in hand
     }
 
     render() {

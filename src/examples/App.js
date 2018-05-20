@@ -3,14 +3,17 @@ import React from 'react'
 import Hello from '../components/hello'
 import {BrowserRouter as Router, Link, Route} from 'react-router-dom'
 
+//Stateless Page1 component
 const Page1 = () => {
     return(<h2>Page 1</h2>)
 };
 
+//Stateless Page2 component
 const Page2 = () => {
     return(<h2>Page 2</h2>)
 };
 
+//Stateless PageParam component
 const PageParam = ({match}) => {
     return(
         <h2>
@@ -19,7 +22,9 @@ const PageParam = ({match}) => {
     )
 };
 
+//Stateful PageUpdate component class
 class PageUpdate extends React.Component {
+
     constructor(props) {
         super(props);
         this.updatePage =
