@@ -4,12 +4,15 @@ import CourseCard from '/Users/priyalmittal/webdev-summer1-2018-react-mittal/src
 // import ModuleList from './ModuleList'
 // import LessonTabs from './LessonTabs'
 import CourseEdit from './CourseEdit'
+import CourseList from "./CourseList";
 
 class CourseManager extends Component {
     render() {
         return (
             <div className="container-fluid">
-                <CourseEdit/>
+                <h1>Course Manager</h1>
+                <CourseList/>
+                {/*<CourseEdit/>*/}
                 {/*<LessonTabs/>*/}
                 {/*<ModuleList/>*/}
                 <div className="card-deck">
@@ -19,7 +22,6 @@ class CourseManager extends Component {
                     <CourseCard/>
                     <CourseCard/>
                     <CourseCard/>
-
                 </div>
             </div>
         )
