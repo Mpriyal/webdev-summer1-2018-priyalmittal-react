@@ -1,5 +1,7 @@
 import React from 'react';
 import CourseService from "../services/CourseService";
+import { Link } from 'react-router-dom'
+
 class CourseRow extends React.Component {
 
     constructor(props) {
@@ -10,7 +12,9 @@ class CourseRow extends React.Component {
     render() {
         return (
             <tr>
-                <td>{this.props.course.title}</td>
+                <Link to={`/course/${this.props.course.id}`}>
+                    <td>{this.props.course.title}</td>
+                </Link>
                 <td>{this.props.course.modified}</td>
                 <td>
                     <button className="btn btn-danger"
