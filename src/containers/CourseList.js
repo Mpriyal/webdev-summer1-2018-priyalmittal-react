@@ -37,7 +37,8 @@ class CourseList extends React.Component {
     createCourse() {
         this.courseService
             .createCourse(this.state.course)
-            .then(() => { this.findAllCourses();}
+            .then(() => { this.findAllCourses();
+            }
             );
     }
 

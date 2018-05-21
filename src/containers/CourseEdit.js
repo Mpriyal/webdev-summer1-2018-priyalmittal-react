@@ -4,15 +4,34 @@ import LessonTabs from './LessonTabs'
 
 export default class CourseEdit
     extends React.Component {
+
+    constructor(props){
+        super(props);
+        this.state = {courseId: ''};
+        this.selectCourse = this.selectCourse.bind(this);
+    }
+
+    componentDidMount() {
+        this.selectCourse
+        (this.props.match.params.courseId);
+    }
+
+    selectCourse(courseId) {
+        this.setState({courseId: courseId});
+    }
+
     render() {
         return (
-            <div className="row">
-                <div className="col-12">
-                    <ModuleList2/>
+            <div>
+                <h2>Editing Course: {this.state.courseId}</h2>
+                <div className="row">
+                    <div className="col-4">
+                        <ModuleList2/>
+                    </div>
+                    <div className="col-8">
+                        <LessonTabs/>
+                    </div>
                 </div>
-                {/*<div className="col-8">*/}
-                    {/*<LessonTabs/>*/}
-                {/*</div>*/}
             </div>
         );
     }
