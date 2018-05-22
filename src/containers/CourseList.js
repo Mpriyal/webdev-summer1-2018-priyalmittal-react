@@ -70,23 +70,8 @@ class CourseList extends React.Component {
     render() {
         return (
             <div>
-            {/*<h2>Course List</h2>*/}
             <table className="table">
             <thead>
-            {/*<tr>*/}
-                {/*<th>*/}
-                    {/*<input className="form-control"*/}
-                           {/*id="titleFld"*/}
-                           {/*onChange={this.courseTitleChanged}*/}
-                           {/*placeholder="New Course Title"/>*/}
-                {/*</th>*/}
-                {/*<th>*/}
-                    {/*<button className="btn btn-primary"*/}
-                            {/*onClick={this.createCourse}>*/}
-                        {/*Add*/}
-                    {/*</button>*/}
-                {/*</th>*/}
-            {/*</tr>*/}
             <nav className="navbar navbar-light navbar-expand">
                 <div className="container">
                     <a className="navbar-brand color-white" href="#">Course Manager {this.state.courseId}</a>
