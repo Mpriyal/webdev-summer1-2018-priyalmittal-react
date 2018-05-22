@@ -61,7 +61,7 @@ export default class LessonTabs
     componentWillReceiveProps(newProps){
         this.setModuleId(newProps.moduleId);
         this.setCourseId(newProps.courseId);
-        this.findAllLessonsForModule(newProps.courseId, newProps.moduleId)
+        this.findAllLessonsForModule(newProps.courseId, newProps.moduleId);
     }
 
     createLesson() {
@@ -83,7 +83,7 @@ export default class LessonTabs
     deleteLesson(courseId, moduleId, lessonId) {
         console.log('delete id: '+moduleId);
         this.lessonService
-            .deleteLesson(courseId, moduleId, lessonId).then(
+            .deleteLesson(lessonId).then(
             () => {
                 this.findAllLessonsForModule(courseId, moduleId);
             }
@@ -91,19 +91,26 @@ export default class LessonTabs
     }
 
     renderListOfLessons() {
-        let lessons = this.state.lessons
-            .map(function(lesson){  //map accumulates a result and returns a concatenated result
-                    return <LessonListItem
-                        title={lesson.title}
-                        key={lesson.id}
-                        lesson={lesson}
-                        delete={self.deleteLesson}
-                        moduleId={self.state.moduleId}/> //its important to uniquely identify each element
-                }
-            );
-        return (
-            lessons
-        )
+        console.log(this.state.lessons);
+        if(this.state.lessons!=undefined) {
+            var lessons = this.state.lessons.map((lesson) => {
+               console.log(lesson);
+            });
+            // var lessons = this.state.lessons.map((lesson) => {  //map accumulates a result and returns a concatenated result
+            //         return <LessonListItem
+            //             title={lesson.title}
+            //             key={lesson.id}
+            //             lesson={lesson}
+            //             delete={self.deleteLesson}
+            //             moduleId={self.state.moduleId}/> //its important to uniquely identify each element
+            //     }
+            // );
+            // return (
+            //     lessons
+            // )
+
+            console.log(lessons);
+        }
     }
 
     render()
