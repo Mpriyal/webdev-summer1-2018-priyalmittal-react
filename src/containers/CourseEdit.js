@@ -1,6 +1,7 @@
 import React from 'react'
 import ModuleList2 from './ModuleList2'
 import LessonTabs from './LessonTabs'
+import ModuleEditor from "./ModuleEditor";
 
 export default class CourseEdit
     extends React.Component {
@@ -26,7 +27,7 @@ export default class CourseEdit
                 <h2>Editing Course: {this.state.courseId}</h2>
                 <div className="row">
                     <div className="col-4">
-                        <ModuleList2/>
+                        <ModuleList2 courseId={this.state.courseId}/>
                     </div>
                     <div className="col-8">
                         <LessonTabs/>
