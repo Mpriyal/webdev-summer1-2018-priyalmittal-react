@@ -19,6 +19,7 @@ class CourseManager extends Component {
                 <Route path="/course/:courseId"
                        component={CourseEdit}>
                 </Route>
+
                 {/*<CourseList/>*/}
                 {/*<CourseEdit/>*/}
                 {/*<LessonTabs/>*/}
