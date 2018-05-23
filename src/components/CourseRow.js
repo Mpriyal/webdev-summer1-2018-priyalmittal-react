@@ -15,7 +15,8 @@ class CourseRow extends React.Component {
                 <Link to={`/course/${this.props.course.id}`}>
                     <td>{this.props.course.title}</td>
                 </Link>
-                <td>{this.props.course.modified}</td>
+                <td>{'me'}</td>
+                <td>{this.props.course.modified.toString().split('T')[0]}</td>
                 <td>
                     <button className="btn btn-danger"
                         onClick={() =>
