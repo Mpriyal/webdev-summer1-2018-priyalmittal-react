@@ -1,5 +1,5 @@
 import React from 'react'
-import ModuleList2 from './ModuleList2'
+import ModuleList from './ModuleList'
 
 export default class CourseEdit
     extends React.Component {
@@ -7,6 +7,7 @@ export default class CourseEdit
     constructor(props) {
         super(props);
         this.state = {
+            course
             courseId: '',
             moduleId: ''
         };
@@ -30,9 +31,8 @@ export default class CourseEdit
     render() {
         return (
             <div>
-                <h2>Editing Course: {this.state.courseId}</h2>
                 <div className="row">
-                    <ModuleList2 courseId={this.state.courseId}/>
+                    <ModuleList courseId={this.state.courseId}/>
                     <div className="col-8">
                     </div>
                 </div>
