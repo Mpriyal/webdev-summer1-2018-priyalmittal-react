@@ -8,7 +8,8 @@ class CourseList extends React.Component {
     constructor() {
         super();
         this.courseService = CourseService.instance;
-        this.state = {courses: []};
+        this.state = {course: {title: ''},
+                    courses: []};
         self = this;
         this.courseTitleChanged = this.courseTitleChanged.bind(this);
         this.createCourse = this.createCourse.bind(this);
@@ -23,7 +24,6 @@ class CourseList extends React.Component {
         this.courseService
             .findAllCourses()
             .then((courses) => {
-                console.log(courses);
                 this.setState({courses: courses});
             })
     }
@@ -35,9 +35,15 @@ class CourseList extends React.Component {
     }
 
     createCourse() {
-
+        let newCourse;
+        if (this.state.course.title === '') {
+            newCourse = {title: 'New Course'};
+        }
+        else {
+            newCourse = this.state.course;
+        }
         this.courseService
-            .createCourse(this.state.course)
+            .createCourse(newCourse)
             .then(() => { this.findAllCourses();
             }
             );
@@ -57,6 +63,7 @@ class CourseList extends React.Component {
             courses = this.state.courses.map(
                 function (course) {
                     return <CourseRow key={course.id}
+                                      title={course.title}
                                       course={course}
                                       delete={self.deleteCourse}/>
                 }
@@ -72,6 +79,8 @@ class CourseList extends React.Component {
             <div>
             <table className="table">
             <thead>
+            <tr>
+            <th>
             <nav className="navbar navbar-light navbar-expand">
                 <div className="container">
                     <a className="navbar-brand color-white" href="#">Course Manager {this.state.courseId}</a>
@@ -84,6 +93,8 @@ class CourseList extends React.Component {
                     </button>
                 </div>
             </nav>
+            </th>
+            </tr>
             <tr>
                 <th>Title</th>
                 <th>Owned By</th>

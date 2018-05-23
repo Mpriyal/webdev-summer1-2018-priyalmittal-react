@@ -1,5 +1,5 @@
 import React from 'react'
-import LessonListItem from "../components/LessonListItem";
+import LessonTabItem from "../components/LessonTabItem";
 import LessonService from "../services/LessonService";
 let self
 
@@ -11,6 +11,7 @@ export default class LessonTabs
         self = this;
         this.state = {
             moduleId: '',
+            courseId: '',
             lesson: {title: ''},
             lessons: [
                 {title: 'Lesson 1', id: 321},
@@ -56,6 +57,7 @@ export default class LessonTabs
 
     componentDidMount() {
         this.setModuleId(this.props.moduleId);
+        this.setCourseId(this.props.courseId);
     }
 
     componentWillReceiveProps(newProps){
@@ -66,13 +68,20 @@ export default class LessonTabs
 
     createLesson() {
         console.log(this.state.lesson);
-        this.lessonService
-            .createLesson(this.props.courseId, this.props.moduleId, this.state.lesson)
-            .then(
-            () => {
-                this.findAllModulesForCourse(this.props.courseId, this.props.moduleId);
-            }
-        );
+        var newLesson;
+        if(this.state.lesson.title === '') {
+            newLesson = {title: 'New Lesson'};
+        }
+        else {
+            newLesson = this.state.lesson;
+        }
+            this.lessonService
+                .createLesson(this.state.courseId, this.state.moduleId, newLesson)
+                .then(
+                    () => {
+                        this.findAllLessonsForModule(this.state.courseId, this.state.moduleId);
+                    }
+                );
     }
 
     titleChanged(event) {
@@ -80,39 +89,40 @@ export default class LessonTabs
         this.setState({lesson:{title: event.target.value}})
     }
 
-    deleteLesson(courseId, moduleId, lessonId) {
-        console.log('delete id: '+moduleId);
+    deleteLesson(lessonId) {
+        // console.log('delete id: '+moduleId);
         this.lessonService
-            .deleteLesson(lessonId).then(
+            .deleteLesson(lessonId)
+            .then(
             () => {
-                this.findAllLessonsForModule(courseId, moduleId);
+                this.findAllLessonsForModule(this.state.courseId, this.state.moduleId);
             }
         );
     }
 
     renderListOfLessons() {
         console.log(this.state.lessons);
-        if(this.state.lessons!=undefined) {
-            var lessons = this.state.lessons.map((lesson) => {
-               console.log(lesson);
-            });
-            // var lessons = this.state.lessons.map((lesson) => {  //map accumulates a result and returns a concatenated result
-            //         return <LessonListItem
-            //             title={lesson.title}
-            //             key={lesson.id}
-            //             lesson={lesson}
-            //             delete={self.deleteLesson}
-            //             moduleId={self.state.moduleId}/> //its important to uniquely identify each element
-            //     }
-            // );
-            // return (
-            //     lessons
-            // )
-
-            console.log(lessons);
+        // if(this.state.lessons!=undefined) {
+        //     var lessons = this.state.lessons.map((lesson) => {
+        //        console.log(lesson);
+        //     });
+            if(this.state.lessons === null) {
+                return null;
+            }
+            var lessons = this.state.lessons.map((lesson) => {  //map accumulates a result and returns a concatenated result
+                    return <LessonTabItem
+                        title={lesson.title}
+                        key={lesson.id}
+                        lesson={lesson}
+                        delete={self.deleteLesson}
+                        moduleId={this.state.moduleId}
+                        courseId={this.state.courseId}/> //its important to uniquely identify each element
+                }
+            );
+            return (
+                lessons
+            )
         }
-    }
-
     render()
     {
         return(

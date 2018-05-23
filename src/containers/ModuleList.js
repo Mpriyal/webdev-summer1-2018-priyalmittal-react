@@ -6,7 +6,7 @@ import {BrowserRouter as Router, Route} from 'react-router-dom';
 
 let self
 
-class ModuleList2 extends React.Component {
+class ModuleList extends React.Component {
     constructor(props) {
         super(props);
         self = this;
@@ -154,4 +154,4 @@ class ModuleList2 extends React.Component {
     }
 }
 
-export default ModuleList2;
+export default ModuleList;

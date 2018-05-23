@@ -7,7 +7,6 @@ export default class CourseEdit
     constructor(props) {
         super(props);
         this.state = {
-            course
             courseId: '',
             moduleId: ''
         };
