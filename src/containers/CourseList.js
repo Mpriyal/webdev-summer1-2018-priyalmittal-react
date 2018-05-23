@@ -35,6 +35,7 @@ class CourseList extends React.Component {
     }
 
     createCourse() {
+
         this.courseService
             .createCourse(this.state.course)
             .then(() => { this.findAllCourses();
@@ -43,7 +44,6 @@ class CourseList extends React.Component {
     }
 
     deleteCourse(courseId) {
-        console.log('delete id: '+courseId);
         this.courseService.deleteCourse(courseId).then(
             () => {
                 this.findAllCourses();
@@ -86,6 +86,7 @@ class CourseList extends React.Component {
             </nav>
             <tr>
                 <th>Title</th>
+                <th>Owned By</th>
                 <th>Last Modified</th>
             </tr>
             </thead>
