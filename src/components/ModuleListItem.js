@@ -8,18 +8,15 @@ export default class ModuleListItem
     }
     render() {
         return (
-            <li className="list-group-item">
+            <li className="list-group-item list-group-item-action">
                 <Link to={`/course/${this.props.courseId}/module/${this.props.module.id}`}>
                     {this.props.title}
                 </Link>
                 <span className="float-right">
-                    <button onClick={() =>
-                    {this.props.delete(this.props.courseId, this.props.module.id)}}>
-                <i className="fa fa-trash"></i>
-                    </button>
-                    <button>
-                <i className="fa fa-pencil"></i>
-                    </button>
+                    <i className="fa fa-times buttonColor" onClick={() => {
+                        this.props.delete(this.props.courseId, this.props.module.id)
+                    }}>
+                        </i>
                 </span>
             </li>
         );
