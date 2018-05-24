@@ -39,12 +39,11 @@ export default class LessonService {
             return fetch(
                 LESSON_API_URL.replace('CID', courseId).replace('MID', moduleId))
                 .then(function (response) {
-                    if(response.status === 500) {
+                    if(response.status == 500) {
                         return null;
                     }
                     else {
-                        return response.json();
-                        console.log(response);
+                            return response.json();
                     }
                 })
     }
