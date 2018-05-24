@@ -81,16 +81,20 @@ class CourseList extends React.Component {
             <thead>
             <tr>
             <th>
-            <nav className="navbar navbar-light navbar-expand">
+            <nav className="navbar navbar-light navbar-expand bignavBar">
                 <div className="container">
-                    <a className="navbar-brand color-white" href="#">Course Manager {this.state.courseId}</a>
-                    <input className="form-control" id="titleFld"
-                           onChange={this.courseTitleChanged}
-                           placeholder="New Course Title "/>
-                    <button className="btn btn-primary"
-                    onClick={this.createCourse}>
-                    Add
-                    </button>
+                    <a className="navbar-brand color-light" href="#">Course Manager {this.state.courseId}</a>
+                    <div className="input-group mb-3">
+                        <input type="text" className="form-control" placeholder="Enter new course title"
+                               aria-label="Enter new course title" aria-describedby="basic-addon2"
+                               onChange={this.courseTitleChanged}/>
+                            <div className="input-group-append">
+                                <button className="btn btn-primary" type="button"
+                                        onClick={this.createCourse}>
+                                    <i className="fa fa-plus"></i>
+                                </button>
+                            </div>
+                    </div>
                 </div>
             </nav>
             </th>
