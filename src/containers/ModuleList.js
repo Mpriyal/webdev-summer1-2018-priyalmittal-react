@@ -121,13 +121,6 @@ class ModuleList extends React.Component {
                                 <nav className="navbar navbar-light navbar-expand bignavBar">
                                     <div className="container">
                                         <a className="navbar-brand color-white" href="#">Module:</a>
-                                        {/*<input className="form-control"*/}
-                                               {/*onChange={this.titleChanged}*/}
-                                               {/*placeholder="New Module Title"/>*/}
-                                        {/*<button className="btn btn-primary"*/}
-                                                {/*onClick={this.createModule}>*/}
-                                            {/*Add*/}
-                                        {/*</button>*/}
                                         <div className="input-group mb-3">
                                             <input type="text" className="form-control" placeholder="Enter new module title"
                                                    aria-label="Enter new module title" aria-describedby="basic-addon2"
