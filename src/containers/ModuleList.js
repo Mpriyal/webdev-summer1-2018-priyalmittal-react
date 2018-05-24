@@ -4,7 +4,7 @@ import ModuleService from '../services/ModuleService'
 import ModuleEditor from './ModuleEditor'
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 
-let self
+let self;
 
 class ModuleList extends React.Component {
     constructor(props) {
@@ -56,13 +56,14 @@ class ModuleList extends React.Component {
     }
 
     deleteModule(courseId, moduleId) {
-        console.log('delete id: ' + moduleId);
-        this.moduleService
-            .deleteModule(courseId, moduleId).then(
-            () => {
-                this.findAllModulesForCourse(courseId);
-            }
-        );
+        if(window.confirm("Are you sure you want to delete this module?")) {
+            this.moduleService
+                .deleteModule(courseId, moduleId).then(
+                () => {
+                    this.findAllModulesForCourse(courseId);
+                }
+            );
+        }
     }
 
     componentDidMount() {
@@ -76,12 +77,10 @@ class ModuleList extends React.Component {
 
     //event listener
     titleChanged(event) {
-        console.log(event.target.value); //captures whatever has been typed in the input field
         this.setState({module: {title: event.target.value}}); //title is set here
     }
 
     createModule() {
-        console.log(this.state.module); //here we have the title as a json object in hand
         let newModule;
         if (this.state.module.title === '') {
             newModule = {title: 'New Module'};
@@ -119,26 +118,30 @@ class ModuleList extends React.Component {
             <Router>
                 <div className='row col-12'>
                     <div className='col-4'>
-                        <h3>Module List for course: {this.state.courseId}</h3>
-                        <ul className="list-group">
-                            <li className='list-group-item'>
-                                <div className='container'>
-                                    <div className='row'>
-                                        <div className='col-10'>
-                                            <input className="form-control"
-                                                   onChange={this.titleChanged}
-                                                   placeholder="New Module Title"/>
-                                        </div>
-                                        <div className='col-2'>
-                                            <button onClick={this.createModule}
-                                                    className="btn btn-primary btn-block">
-                                                <i className=
-                                                       "fa fa-plus"></i>
-                                            </button>
+                                <nav className="navbar navbar-light navbar-expand bignavBar">
+                                    <div className="container">
+                                        <a className="navbar-brand color-white" href="#">Module:</a>
+                                        {/*<input className="form-control"*/}
+                                               {/*onChange={this.titleChanged}*/}
+                                               {/*placeholder="New Module Title"/>*/}
+                                        {/*<button className="btn btn-primary"*/}
+                                                {/*onClick={this.createModule}>*/}
+                                            {/*Add*/}
+                                        {/*</button>*/}
+                                        <div className="input-group mb-3">
+                                            <input type="text" className="form-control" placeholder="Enter new module title"
+                                                   aria-label="Enter new module title" aria-describedby="basic-addon2"
+                                                   onChange={this.titleChanged}/>
+                                            <div className="input-group-append">
+                                                <button className="btn btn-primary" type="button"
+                                                        onClick={this.createModule}>
+                                                    <i className="fa fa-plus"></i>
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </li>
+                                </nav>
+                        <ul className="list-group">
                             {this.renderListOfModules()}
                         </ul>
                     </div>

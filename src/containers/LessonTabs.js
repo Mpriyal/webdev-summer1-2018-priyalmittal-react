@@ -90,22 +90,18 @@ export default class LessonTabs
     }
 
     deleteLesson(lessonId) {
-        // console.log('delete id: '+moduleId);
-        this.lessonService
-            .deleteLesson(lessonId)
-            .then(
-            () => {
-                this.findAllLessonsForModule(this.state.courseId, this.state.moduleId);
-            }
-        );
+        if(window.confirm("Are you sure you want to delete this lesson?")) {
+            this.lessonService
+                .deleteLesson(lessonId)
+                .then(
+                    () => {
+                        this.findAllLessonsForModule(this.state.courseId, this.state.moduleId);
+                    }
+                );
+        }
     }
 
     renderListOfLessons() {
-        console.log(this.state.lessons);
-        // if(this.state.lessons!=undefined) {
-        //     var lessons = this.state.lessons.map((lesson) => {
-        //        console.log(lesson);
-        //     });
             if(this.state.lessons === null) {
                 return null;
             }
@@ -123,23 +119,34 @@ export default class LessonTabs
                 lessons
             )
         }
-    render()
-    {
-        return(
-        <div>
-            <h3>Lesson List for module: {this.state.moduleId}</h3>
-            <input className="form-control"
-                   onChange={this.titleChanged}
-                   placeholder="New Lesson Title"/>
-            <button onClick={this.createLesson}
-                    className="btn btn-primary btn-block">
-                <i className=
-                       "fa fa-plus"></i>
-            </button>
-        <ul className="nav nav-tabs">
-            {this.renderListOfLessons()}
-        </ul>
-        </div>
-    );
+    render() {
+        if (this.state.lessons === null) {
+            return null;
+        }
+        else {
+            return (
+                <div>
+                    <nav className="navbar navbar-light navbar-expand bignavBar">
+                        <div className="container">
+                            <a className="navbar-brand color-white" href="#">Lesson:</a>
+                            <div className="input-group mb-3">
+                                <input type="text" className="form-control" placeholder="Enter new lesson title"
+                                       aria-label="Enter new lesson title" aria-describedby="basic-addon2"
+                                       onChange={this.titleChanged}/>
+                                <div className="input-group-append">
+                                    <button className="btn btn-primary" type="button"
+                                            onClick={this.createLesson}>
+                                        <i className="fa fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+                    <ul className="nav nav-tabs">
+                        {this.renderListOfLessons()}
+                    </ul>
+                </div>
+            );
+        }
     }
 }
