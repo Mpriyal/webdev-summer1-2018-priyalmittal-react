@@ -60,7 +60,6 @@ class ModuleList extends React.Component {
             this.moduleService
                 .deleteModule(courseId, moduleId).then(
                 () => {
-                    // this.findAllModulesForCourse(courseId);
                     window.location.href = '/course/' + courseId;
                 }
             );
