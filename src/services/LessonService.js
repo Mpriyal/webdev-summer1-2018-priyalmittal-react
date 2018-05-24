@@ -36,13 +36,17 @@ export default class LessonService {
     }
 
     findAllLessonsForModule(courseId, moduleId) {
-        console.log(courseId);
-        console.log(moduleId);
-        return fetch(
-            LESSON_API_URL.replace('CID',courseId).replace('MID', moduleId))
-            .then(function (response) {
-                return response.json();
-            })
+            return fetch(
+                LESSON_API_URL.replace('CID', courseId).replace('MID', moduleId))
+                .then(function (response) {
+                    if(response.status === 500) {
+                        return null;
+                    }
+                    else {
+                        return response.json();
+                        console.log(response);
+                    }
+                })
     }
 
     deleteLesson(lessonId) {
