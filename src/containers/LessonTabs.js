@@ -1,6 +1,9 @@
 import React from 'react'
 import LessonTabItem from "../components/LessonTabItem";
 import LessonService from "../services/LessonService";
+import ModuleEditor from "./ModuleEditor";
+import {BrowserRouter as Router, Route} from 'react-router-dom';
+import LessonEditor from "./LessonEditor";
 let self
 
 export default class LessonTabs
@@ -125,6 +128,8 @@ export default class LessonTabs
         }
         else {
             return (
+                <Router>
+                    <div>
                 <div>
                     <nav className="navbar navbar-light navbar-expand bignavBar">
                         <div className="container">
@@ -146,6 +151,14 @@ export default class LessonTabs
                         {this.renderListOfLessons()}
                     </ul>
                 </div>
+                        <div className='col-8'>
+                            <ul className="nav nav-tabs">
+                                <Route path='/course/:courseId/module/:moduleId'
+                                       component={LessonEditor}/>
+                            </ul>
+                        </div>
+                    </div>
+                </Router>
             );
         }
     }
