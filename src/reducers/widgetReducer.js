@@ -24,7 +24,7 @@ export const widgetReducer = (state = {widgets: [], preview: false}, action) => 
             return {
                 widgets: state.widgets.map(widget => {
                     if(widget.id === action.id) {
-                        widget.size = action.size
+                        widget.headingWidgetSize = action.headingWidgetSize
                     }
                     return Object.assign({}, widget)
                 })
@@ -43,8 +43,7 @@ export const widgetReducer = (state = {widgets: [], preview: false}, action) => 
             return JSON.parse(JSON.stringify(newState))
 
         case constants.SAVE:
-
-
+            console.log(state.widgets);
             fetch('http://localhost:8080/api/widget/save', {
                 method: 'post',
                 body: JSON.stringify(state.widgets),
@@ -52,11 +51,11 @@ export const widgetReducer = (state = {widgets: [], preview: false}, action) => 
                     'content-type': 'application/json'}
             })
 
-
             return state
         case constants.FIND_ALL_WIDGETS:
             newState = Object.assign({}, state)
             newState.widgets = action.widgets
+            // console.log(newState);
             return newState
         case constants.DELETE_WIDGET:
             return {
@@ -72,7 +71,7 @@ export const widgetReducer = (state = {widgets: [], preview: false}, action) => 
                         id: state.widgets.length + 1,
                         text: 'New Widget',
                         widgetType: 'Paragraph',
-                        size: '2'
+                        headingWidgetSize: '2'
                     }
                 ]
             }

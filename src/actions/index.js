@@ -10,7 +10,7 @@ export const headingSizeChanged = (dispatch, widgetId, newSize) => (
     dispatch({
         type: constants.HEADING_SIZE_CHANGED,
         id: widgetId,
-        size: newSize})
+        headingWidgetSize: newSize})
 )
 
 export const findAllWidgets = dispatch => {
@@ -23,9 +23,24 @@ export const findAllWidgets = dispatch => {
 export const addWidget = dispatch => (
     dispatch({type: constants.ADD_WIDGET})
 )
+
 export const save = dispatch => (
     dispatch({type: constants.SAVE})
 )
+
 export const preview = dispatch => (
     dispatch({type: constants.PREVIEW})
 )
+
+// export const findWidgetOfLesson = (dispatch, lessonId) => {
+//     if (lessonId === null) {
+//         return null
+//     }
+//     fetch('http://localhost:8080/api/lesson/' + lessonId + '/widget')
+//         .then(response => (response.json()))
+//         .then(widgets => dispatch({
+//             type: constants.FIND_WIDGETS_OF_LESSON,
+//             currentLessonId: lessonId,
+//             widgets: widgets
+//         }))
+// }

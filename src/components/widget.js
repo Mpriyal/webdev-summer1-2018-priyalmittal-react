@@ -12,7 +12,7 @@ const Heading = ({widget, preview, headingTextChanged, headingSizeChanged}) => {
             <div hidden={preview}>
                 <h3> Heading Widget: {widget.headingWidgetSize}</h3>
                 <input onChange={() => headingTextChanged(widget.id, inputElem.value)}
-                       value={widget.widgetText}
+                       value={widget.text}
                        ref={node => inputElem = node}/>
                 <select onChange={() => headingSizeChanged(widget.id, selectElem.value)}
                         value={widget.headingWidgetSize}
@@ -23,9 +23,9 @@ const Heading = ({widget, preview, headingTextChanged, headingSizeChanged}) => {
                 </select>
                 <h3>Preview</h3>
             </div>
-            {widget.headingWidgetSize == 1 && <h1>{widget.widgetText}</h1>}
-            {widget.headingWidgetSize == 2 && <h2>{widget.widgetText}</h2>}
-            {widget.headingWidgetSize == 3 && <h3>{widget.widgetText}</h3>}
+            {widget.headingWidgetSize == 1 && <h1>{widget.text}</h1>}
+            {widget.headingWidgetSize == 2 && <h2>{widget.text}</h2>}
+            {widget.headingWidgetSize == 3 && <h3>{widget.text}</h3>}
         </div>
     )
 }
@@ -40,8 +40,6 @@ const stateToPropsMapper = state => ({
     preview: state.preview
 })
 
-const HeadingContainer = connect(stateToPropsMapper, dispatchToPropsMapper)(Heading)
-
 //Paragraph widget
 const Paragraph = ({widget, preview, headingTextChanged}) => {
     let paraInputElem;
@@ -49,13 +47,12 @@ const Paragraph = ({widget, preview, headingTextChanged}) => {
     <div>
         <div hidden={preview}>
         <h2>Paragraph</h2>
-        <textarea>
-            value={widget.widgetText}
+        <textarea
+            value={widget.text}
             onChange={() => headingTextChanged(widget.id, paraInputElem.value)}
             ref={node => paraInputElem = node}/>
-        </textarea>
         </div>
-        <p>{widget.widgetText}</p>
+        <p>{widget.text}</p>
     </div>
     )
 }
@@ -74,6 +71,14 @@ const Widget = ({widget, preview, dispatch}) => {
     let selectElement
     return(
         <div className="card container">
+            {/*<div className="float-right">*/}
+                {/*<button>*/}
+                {/*<i className="fa fa-chevron-up"></i>*/}
+                {/*</button>*/}
+                {/*<button>*/}
+                {/*<i className="fa fa-chevron-down"></i>*/}
+                {/*</button>*/}
+            {/*</div>*/}
             <div hidden={preview}>
                 {/*{widget.id}*/}
                 {widget.widgetType}
@@ -95,13 +100,17 @@ const Widget = ({widget, preview, dispatch}) => {
             </div>
             <div>
                 {widget.widgetType==='Heading' && <HeadingContainer widget={widget}/>}
-                {widget.widgetType==='Paragraph' && <Paragraph/>}
+                {widget.widgetType==='Paragraph' && <ParagraphContainer widget={widget}/>}
                 {widget.widgetType==='List' && <List/>}
                 {widget.widgetType==='Image' && <Image/>}
             </div>
         </div>
     )
 }
+
+const HeadingContainer = connect(stateToPropsMapper, dispatchToPropsMapper)(Heading)
+const ParagraphContainer = connect(stateToPropsMapper, dispatchToPropsMapper)(Paragraph)
+
 const WidgetContainer = connect(state => ({
     preview: state.preview
 }))(Widget)
