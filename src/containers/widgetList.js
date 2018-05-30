@@ -10,23 +10,23 @@ class WidgetList extends Component {
     }
     render() {
         return(
-            <div>
-                <h1>Widget List {this.props.widgets.length}</h1>
+            <div className="container">
+                {/*<h1>Widget List {this.props.widgets.length}</h1>*/}
 
-                <button hidden={this.props.previewMode} onClick={this.props.save}>
+                <button className="btn btn-success float-left" hidden={this.props.previewMode} onClick={this.props.save}>
                     Save
                 </button>
-                <button onClick={this.props.preview}>
+                <button className="btn btn-primary float-md-right" onClick={this.props.preview}>
                     Preview
                 </button>
 
-                <ul>
+                <div>
                     {this.props.widgets.map(widget => (
                         <WidgetContainer widget={widget}
                                          preview={this.props.previewMode}
                                          key={widget.id}/>
                     ))}
-                </ul>
+                </div>
                 <button onClick={this.props.addWidget}>Add widget
                 </button>
             </div>

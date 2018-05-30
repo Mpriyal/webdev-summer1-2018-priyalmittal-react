@@ -151,11 +151,11 @@ export default class LessonTabs
                         {this.renderListOfLessons()}
                     </ul>
                 </div>
-                        <div className='col-8'>
-                            <ul className="nav nav-tabs">
-                                <Route path='/course/:courseId/module/:moduleId'
+                        <div>
+                            <div>
+                                <Route path='/course/:courseId/module/:moduleId/lesson/:lessonId'
                                        component={LessonEditor}/>
-                            </ul>
+                            </div>
                         </div>
                     </div>
                 </Router>
