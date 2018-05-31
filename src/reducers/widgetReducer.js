@@ -1,8 +1,39 @@
 import * as constants from "../constants/index"
+import {RENDER_LINK_URL} from "../constants/index";
 
 export const widgetReducer = (state = {widgets: [], preview: false}, action) => {
     let newState
     switch (action.type) {
+
+        case constants.RENDER_LINK_URL:
+            return {
+                widgets: state.widgets.map(widget => {
+                    if (widget.id === action.id) {
+                        widget.href = action.href
+                    }
+                    return Object.assign({}, widget)
+                })
+            }
+
+        case constants.MOVE_WIDGET_UP:
+            state.widgets.map(widget=>{
+                if(widget.id === action.widget.id && widget.order !== 1){
+                    action.widget.order--;
+                    widget = action.widget;
+                }
+                return Object.assign({}, widget)
+            });
+            return state;
+
+        case constants.MOVE_WIDGET_DOWN:
+            state.widgets.map(widget=>{
+                if(widget.id === action.widget.id){
+                    action.widget.order++;
+                    widget = action.widget;
+                }
+                return Object.assign({}, widget)
+            });
+            return state;
 
         case constants.PREVIEW:
             return {
@@ -68,10 +99,10 @@ export const widgetReducer = (state = {widgets: [], preview: false}, action) => 
                 widgets: [
                     ...state.widgets,
                     {
-                        id: state.widgets.length + 1,
+                        id: state.widgets.length + 10,
                         text: 'New Widget',
-                        widgetType: 'Paragraph',
-                        headingWidgetSize: '2'
+                        widgetType: 'Heading',
+                        headingWidgetSize: '1'
                     }
                 ]
             }

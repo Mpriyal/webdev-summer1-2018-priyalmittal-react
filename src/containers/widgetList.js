@@ -21,6 +21,7 @@ class WidgetList extends Component {
                 </button>
 
                 <div>
+                    {console.log(this.props.widgets)}
                     {this.props.widgets.map(widget => (
                         <WidgetContainer widget={widget}
                                          preview={this.props.previewMode}

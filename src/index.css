@@ -12,3 +12,7 @@ body{
 .top-pad{
     padding-top: 30px;
 }
+
+.card{
+    margin: 5px;
+}
