@@ -10,9 +10,10 @@ export default class LessonTabItem
         return (
             <li className="nav-item">
                 <div className="nav-link">
-                    <Link to={`/course/${this.props.courseId}/module/${this.props.moduleId}/lesson/${this.props.lesson.id}`}>
+                    <Link onClick={window.location.reload} to={`/course/${this.props.courseId}/module/${this.props.moduleId}/lesson/${this.props.lesson.id}/widget`}>
                         {this.props.lesson.title}
                     </Link>
+
                 </div>
                 <span className="float-right">
                     <i className="fa fa-times" onClick={() =>

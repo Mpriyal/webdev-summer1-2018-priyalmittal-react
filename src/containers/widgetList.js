@@ -5,15 +5,19 @@ import WidgetContainer from '../components/widget'
 
 class WidgetList extends Component {
     constructor(props) {
-        super(props)
-        this.props.findAllWidgets()
+        super(props);
+        this.props.findAllWidgets(this.props.lessonId);
+        console.log(this.props);
     }
+
     render() {
+        console.log("heloooooo")
+        console.log(this.props.lessonId)
         return(
             <div className="container">
                 {/*<h1>Widget List {this.props.widgets.length}</h1>*/}
 
-                <button className="btn btn-success float-left" hidden={this.props.previewMode} onClick={this.props.save}>
+                <button className="btn btn-success float-left" hidden={this.props.previewMode} onClick= {() => {this.props.save(this.props.lessonId)}}>
                     Save
                 </button>
                 <button className="btn btn-primary float-md-right" onClick={this.props.preview}>
@@ -21,9 +25,10 @@ class WidgetList extends Component {
                 </button>
 
                 <div>
-                    {console.log(this.props.widgets)}
+                    {console.log(this.props.lessonId)}
                     {this.props.widgets.map(widget => (
                         <WidgetContainer widget={widget}
+                                         lessonId={this.props.lessonId}
                                          preview={this.props.previewMode}
                                          key={widget.id}/>
                     ))}
@@ -38,14 +43,14 @@ class WidgetList extends Component {
 const stateToPropertiesMapper = (state) => ({
     widgets: state.widgets,
     previewMode: state.preview
-})
+});
 const dispatcherToPropsMapper
     = dispatch => ({
-    findAllWidgets: () => actions.findAllWidgets(dispatch),
+    findAllWidgets: (lessonId) => actions.findAllWidgets(dispatch, lessonId),
     addWidget: () => actions.addWidget(dispatch),
-    save: () => actions.save(dispatch),
+    save: (lessonId) => actions.save(dispatch, lessonId),
     preview: () => actions.preview(dispatch)
-})
+});
 const App = connect(
     stateToPropertiesMapper,
     dispatcherToPropsMapper)(WidgetList)

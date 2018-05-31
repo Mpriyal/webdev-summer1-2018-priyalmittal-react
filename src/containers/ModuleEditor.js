@@ -1,5 +1,12 @@
 import React from 'react'
 import LessonTabs from './LessonTabs'
+import App from '../containers/widgetList'
+import {Provider, connect} from 'react-redux'
+import CourseEdit from "./CourseEdit";
+import {Route, Link} from 'react-router-dom'
+import {createStore} from "redux";
+import {widgetReducer} from "../reducers/widgetReducer";
+import LessonEditor from "./LessonEditor";
 
 export default class ModuleEditor
     extends React.Component {
@@ -36,6 +43,10 @@ export default class ModuleEditor
             <div>
                 <LessonTabs moduleId={this.state.moduleId}
                             courseId={this.state.courseId}/>
+                <Route path="/course/:courseId/module/:moduleId/lesson/:lessonId/widget"
+                       component={LessonEditor}>
+                </Route>
+
             </div>
         )
     }

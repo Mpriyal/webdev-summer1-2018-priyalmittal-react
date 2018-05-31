@@ -151,12 +151,12 @@ export default class LessonTabs
                         {this.renderListOfLessons()}
                     </ul>
                 </div>
-                        <div>
-                            <div>
-                                <Route path='/course/:courseId/module/:moduleId/lesson/:lessonId'
-                                       component={LessonEditor}/>
-                            </div>
-                        </div>
+                        {/*<div>*/}
+                            {/*<div>*/}
+                                {/*<Route path='/course/:courseId/module/:moduleId/lesson/:lessonId'*/}
+                                       {/*component={LessonEditor}/>*/}
+                            {/*</div>*/}
+                        {/*</div>*/}
                     </div>
                 </Router>
             );

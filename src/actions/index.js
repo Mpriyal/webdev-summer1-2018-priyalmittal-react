@@ -13,12 +13,20 @@ export const headingSizeChanged = (dispatch, widgetId, newSize) => (
         headingWidgetSize: newSize})
 )
 
-export const findAllWidgets = dispatch => {
-    fetch('http://localhost:8080/api/widget')
+export const listTypeChanged = (dispatch, widgetId, newType) => (
+    dispatch({
+        type: constants.LIST_TYPE_CHANGED,
+        id: widgetId,
+        listType: newType})
+)
+
+export const findAllWidgets = (dispatch, lessonId)=> {
+
+    fetch('http://localhost:8080/api/lesson/'+lessonId+"/widget")
         .then(response => (response.json()))
         .then(widgets => {
                 widgets.sort(function (a,b) {
-                        return a.order - b.order;
+                        return a.widgetOrder - b.widgetOrder;
                 })
                 return dispatch({
                     type: constants.FIND_ALL_WIDGETS,
@@ -30,9 +38,12 @@ export const addWidget = dispatch => (
     dispatch({type: constants.ADD_WIDGET})
 )
 
-export const save = dispatch => (
-    dispatch({type: constants.SAVE})
-)
+export const save = (dispatch, lessonId) => {
+
+    return (
+    dispatch({type: constants.SAVE,
+    lessonId: lessonId})
+)};
 
 export const preview = dispatch => (
     dispatch({type: constants.PREVIEW})
@@ -43,6 +54,12 @@ export const renderLinkUrl = (dispatch, id, url) => (
                 id: id,
                 href: url})
         )
+export const renderImageUrl = (dispatch, id, url) => (
+    dispatch({
+        type: constants.RENDER_IMAGE_URL,
+        id: id,
+        src: url})
+)
 
 // export const findWidgetOfLesson = (dispatch, lessonId) => {
 //     if (lessonId === null) {
@@ -52,7 +69,7 @@ export const renderLinkUrl = (dispatch, id, url) => (
 //         .then(response => (response.json()))
 //         .then(widgets => dispatch({
 //             type: constants.FIND_WIDGETS_OF_LESSON,
-//             currentLessonId: lessonId,
+//             activeLessonId: lessonId,
 //             widgets: widgets
 //         }))
 // }

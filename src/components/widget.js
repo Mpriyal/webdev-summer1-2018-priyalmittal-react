@@ -58,7 +58,11 @@ const dispatchToPropsMapper = dispatch => ({
     headingSizeChanged: (widgetId, newSize) =>
         actions.headingSizeChanged(dispatch, widgetId, newSize),
     renderLinkUrl: (id, url) =>
-        actions.renderLinkUrl(dispatch, id, url)
+        actions.renderLinkUrl(dispatch, id, url),
+    listTypeChanged: (widgetId, newType) =>
+        actions.listTypeChanged(dispatch, widgetId, newType),
+    renderImageUrl: (id, url) =>
+        actions.renderImageUrl(dispatch, id, url),
 })
 
 const stateToPropsMapper = state => ({
@@ -91,14 +95,13 @@ const Paragraph = ({widget, preview, headingTextChanged}) => {
                        placeholder="Widget Name"/>
             </div>
         </div>
-        {/*<h3>Preview</h3>*/}
         <p>{widget.text}</p>
     </div>
     )
 }
 
 //Image widget
-const Image = ({widget, preview, headingTextChanged}) => {
+const Image = ({widget, preview, renderImageUrl}) => {
     let imageInputElem;
     return (
         <div className="container-fluid">
@@ -109,8 +112,8 @@ const Image = ({widget, preview, headingTextChanged}) => {
                         <span className="input-group-text">URL</span>
                     </div>
                     <input className="form-control"
-                           onChange={() => headingTextChanged(widget.id, imageInputElem.value)}
-                           value={widget.text}
+                           onChange={() => renderImageUrl(widget.id, imageInputElem.value)}
+                           value={widget.src}
                            placeholder="Insert Image URL"
                            ref={node => imageInputElem = node}/>
                 </div>
@@ -122,16 +125,78 @@ const Image = ({widget, preview, headingTextChanged}) => {
                            placeholder="Widget Name"/>
                 </div>
             </div>
-            {/*<h3>Preview</h3>*/}
-            <img src={widget.text} alt="No image to display"/>
+            <img src={widget.src} alt="No image to display"/>
         </div>
         )
 }
 
+const displayList = (text, zeroOrOne) => {
+    console.log("bro");
+    console.log(zeroOrOne);
+    let elemArr = (text.split("\n"));
+
+    if(zeroOrOne === "ordered"){
+        return(
+            <ol className="list-group">
+                {elemArr.map(elem => (<li> {elem} </li>))}
+            </ol>
+        )
+    }
+    else{
+        return(
+            <ul className="list-group">
+                {elemArr.map(elem => (<li> {elem} </li>))}
+            </ul>
+        )
+    }
+
+}
+
 //List widget
-const List = () => (
-    <h2>List</h2>
+const List = ({widget, preview, headingTextChanged, headingSizeChanged, listTypeChanged}) => {
+    let listInputElem;
+    let listSelectElem;
+return (
+    <div className="container-fluid">
+        <div hidden={preview}>
+            <h2>List</h2>
+            <div className="input-group mb-3">
+                <div className="input-group-prepend">
+                    <span className="input-group-text">List Text</span>
+                </div>
+                <textarea
+                    className="form-control"
+                    placeholder="Enter Paragraph text"
+                    value={widget.text}
+                    onChange={() => headingTextChanged(widget.id, listInputElem.value)}
+                    ref={node => listInputElem = node}/>
+            </div>
+            <div className="input-group mb-3">
+                <div className="input-group-prepend">
+                    <span className="input-group-text" htmlFor="inputGroupSelect01">List Type</span>
+                </div>
+                <select className="custom-select"
+                        id="inputGroupSelect01"
+                        onChange={() => listTypeChanged(widget.id, listSelectElem.value)}
+                        value={widget.listType}
+                        ref={node => listSelectElem = node}>
+                    <option value='ordered'>Ordered</option>
+                    <option value='unordered'>Unordered</option>
+                </select>
+            </div>
+
+            <div className="input-group mb-3">
+                <div className="input-group-prepend">
+                    <span className="input-group-text">Widget Name</span>
+                </div>
+                <input className="form-control"
+                       placeholder="Widget Name"/>
+            </div>
+        </div>
+        {displayList(widget.text, widget.listType)}
+    </div>
 )
+}
 
 //Link widget
 const Link =({widget, preview, headingTextChanged, renderLinkUrl}) => {
@@ -175,12 +240,11 @@ const Link =({widget, preview, headingTextChanged, renderLinkUrl}) => {
     )
 }
 
-const Widget = ({widget, preview, dispatch}) => {
+const Widget = ({widget, lessonId, preview, dispatch}) => {
     let selectElement
     return(
         <div className="card container">
             <div hidden={preview}>
-                {/*{widget.widgetType}*/}
                 <select value={widget.widgetType}
                         onChange={e =>
                             dispatch({
@@ -208,7 +272,7 @@ const Widget = ({widget, preview, dispatch}) => {
             <div>
                 {widget.widgetType==='Heading' && <HeadingContainer widget={widget}/>}
                 {widget.widgetType==='Paragraph' && <ParagraphContainer widget={widget}/>}
-                {widget.widgetType==='List' && <List/>}
+                {widget.widgetType==='List' && <ListContainer widget={widget}/>}
                 {widget.widgetType==='Image' && <ImageContainer widget={widget}/>}
                 {widget.widgetType==='Link' && <LinkContainer widget={widget}/>}
             </div>
@@ -220,7 +284,9 @@ const HeadingContainer = connect(stateToPropsMapper, dispatchToPropsMapper)(Head
 const ParagraphContainer = connect(stateToPropsMapper, dispatchToPropsMapper)(Paragraph)
 const ImageContainer = connect(stateToPropsMapper, dispatchToPropsMapper)(Image)
 const LinkContainer = connect(stateToPropsMapper, dispatchToPropsMapper)(Link)
+const ListContainer = connect(stateToPropsMapper, dispatchToPropsMapper)(List)
 const WidgetContainer = connect(state => ({
+    lessonId: state.lessonId,
     preview: state.preview
 }))(Widget);
 export default WidgetContainer

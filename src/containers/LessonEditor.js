@@ -7,6 +7,7 @@ import {widgetReducer} from "../reducers/widgetReducer"
 import {WidgetContainer} from '../components/widget'
 import {findAllWidgets, addWidget, save} from "../actions/index"
 import App from '../containers/widgetList'
+import {BrowserRouter as Router, Route} from 'react-router-dom';
 
 let store = createStore(widgetReducer)
 
@@ -47,11 +48,15 @@ export default class LessonEditor
         this.selectLesson(newProps.match.params.lessonId);
     }
     render() {
-        console.log(this.state.lessonId)
+        console.log("hello");
+        console.log(this.state.lessonId);
         return (
-            <Provider store={store}>
-                <App/>
+            <Provider  store={store}>
+                <App courseId = {this.props.match.params.courseId}
+                        moduleId={this.props.match.params.moduleId}
+                        lessonId={this.props.match.params.lessonId}/>
             </Provider>
+
         )
     }
 }
