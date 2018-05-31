@@ -10,6 +10,15 @@ class WidgetList extends Component {
         console.log(this.props);
     }
 
+    sortWidget() {
+        this.props.widgets.sort(function (wid1, wid2) {
+            return wid1.widgetOrder = wid2.widgetOrder
+        });
+        return this.props.widgets.map(widget => (
+            <WidgetContainer widget={widget}
+                             key={widget.id}/>))
+    }
+
     render() {
         console.log("heloooooo")
         console.log(this.props.lessonId)
@@ -23,7 +32,9 @@ class WidgetList extends Component {
                 <button className="btn btn-primary float-md-right" onClick={this.props.preview}>
                     Preview
                 </button>
-
+                <div>
+                    {this.sortWidget}
+                </div>
                 <div>
                     {console.log(this.props.lessonId)}
                     {this.props.widgets.map(widget => (

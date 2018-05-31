@@ -51,6 +51,9 @@ export const widgetReducer = (state = {widgets: [], activeLessonId: null, previe
             return state;
 
         case constants.MOVE_WIDGET_DOWN:
+            let maxVal = Math.max.apply(Math, state.widgets.map(function (widget) {
+                return widget.widgetOrder;
+            }));
             state.widgets.map(widget=>{
                 if(widget.id === action.widget.id){
                     action.widget.widgetOrder++;
