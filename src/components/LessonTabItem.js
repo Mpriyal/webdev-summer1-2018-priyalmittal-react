@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 export default class LessonTabItem
     extends React.Component {
@@ -10,9 +10,9 @@ export default class LessonTabItem
         return (
             <li className="nav-item">
                 <div className="nav-link">
-                    <Link onClick={window.location.reload} to={`/course/${this.props.courseId}/module/${this.props.moduleId}/lesson/${this.props.lesson.id}/widget`}>
+                    <NavLink activeStyle={{color:"#FFFFFF", backgroundColor:"#007bff"}} onClick={window.location.reload} to={`/course/${this.props.courseId}/module/${this.props.moduleId}/lesson/${this.props.lesson.id}/widget`}>
                         {this.props.lesson.title}
-                    </Link>
+                    </NavLink>
 
                 </div>
                 <span className="float-right">

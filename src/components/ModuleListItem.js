@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 export default class ModuleListItem
     extends React.Component {
@@ -9,9 +9,9 @@ export default class ModuleListItem
     render() {
         return (
             <li className="list-group-item list-group-item-action">
-                <Link to={`/course/${this.props.courseId}/module/${this.props.module.id}`}>
+                <NavLink activeStyle={{color:"#FFFFFF", backgroundColor:"#007bff"}} to={`/course/${this.props.courseId}/module/${this.props.module.id}`}>
                     {this.props.title}
-                </Link>
+                </NavLink>
                 <span className="float-right">
                     <i className="fa fa-times buttonColor" onClick={() => {
                         this.props.delete(this.props.courseId, this.props.module.id)

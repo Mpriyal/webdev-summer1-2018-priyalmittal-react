@@ -22,7 +22,7 @@ class ModuleList extends React.Component {
                 {title: 'Module 6 - MongoDB', id: 678}
             ]
         };
-        this.titleChanged = this.titleChanged.bind(this);
+        this.moduleTitleChanged = this.moduleTitleChanged.bind(this);
         this.createModule = this.createModule.bind(this);
         this.deleteModule = this.deleteModule.bind(this);
         this.setCourseId = this.setCourseId.bind(this);
@@ -76,7 +76,7 @@ class ModuleList extends React.Component {
     }
 
     //event listener
-    titleChanged(event) {
+    moduleTitleChanged(event) {
         this.setState({module: {title: event.target.value}}); //title is set here
     }
 
@@ -96,7 +96,7 @@ class ModuleList extends React.Component {
         );
     }
 
-    renderListOfModules() {
+       renderListOfModules() {
         let modules = this.state.modules
             .map(function (module) {  //map accumulates a result and returns a concatenated result
                     return <ModuleListItem
@@ -124,7 +124,7 @@ class ModuleList extends React.Component {
                                         <div className="input-group mb-3">
                                             <input type="text" className="form-control" placeholder="Enter new module title"
                                                    aria-label="Enter new module title" aria-describedby="basic-addon2"
-                                                   onChange={this.titleChanged}/>
+                                                   onChange={this.moduleTitleChanged}/>
                                             <div className="input-group-append">
                                                 <button className="btn btn-primary" type="button"
                                                         onClick={this.createModule}>

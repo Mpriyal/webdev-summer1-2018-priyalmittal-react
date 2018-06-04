@@ -34,8 +34,6 @@ export default class CourseEdit
         this.courseService.findAllById(courseId)
             .then(function (response) {
                 self.selectCourseTitle(response.title);
-                // console.log("yo yo honey");
-                // console.log(response);
             })
     }
 
